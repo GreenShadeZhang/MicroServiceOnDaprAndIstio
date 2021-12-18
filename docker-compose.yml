@@ -1,0 +1,50 @@
+version: '3.4'
+
+services:
+  microservice.httpa:
+    image: ${DOCKER_REGISTRY-}microservicehttpa
+    build:
+      context: .
+      dockerfile: MicroService.HttpA/Dockerfile
+
+  microservice-httpa-dapr:
+    image: "daprio/daprd:1.5.1"
+    network_mode: "service:microservice.httpa"
+    depends_on:
+        - microservice.httpa
+
+  microservice.httpb:
+    image: ${DOCKER_REGISTRY-}microservicehttpb
+    build:
+      context: .
+      dockerfile: MicroService.HttpB/Dockerfile
+
+  microservice-httpb-dapr:
+    image: "daprio/daprd:1.5.1"
+    network_mode: "service:microservice.httpb"
+    depends_on:
+        - microservice.httpb
+
+  microservice.grpca:
+    image: ${DOCKER_REGISTRY-}microservicegrpca
+    build:
+      context: .
+      dockerfile: MicroService.GrpcA/Dockerfile
+
+  microservice-grpca-dapr:
+    image: "daprio/daprd:1.5.1"
+    network_mode: "service:microservice.grpca"
+    depends_on:
+        - microservice.grpca
+
+  microservice.grpcb:
+    image: ${DOCKER_REGISTRY-}microservicegrpcb
+    build:
+      context: .
+      dockerfile: MicroService.GrpcB/Dockerfile
+
+  microservice-grpcb-dapr:
+    image: "daprio/daprd:1.5.1"
+    network_mode: "service:microservice.grpcb"
+    depends_on:
+        - microservice.grpcb
