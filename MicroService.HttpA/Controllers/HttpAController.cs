@@ -26,13 +26,25 @@ namespace MicroService.HttpA.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetGrpcAByBAsync(string name)
+        public async Task<IActionResult> GetGrpcAByGrpcBAsync(string name)
         {
             var request = new HelloRequest { Name = name };
 
             var ret = await _daprClient.InvokeMethodGrpcAsync<HelloRequest, HelloReply>("grpcb", "getGreeterA", request);
 
             return this.Ok(ret.Message);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetHttpBByGrpcBAsync(string name)
+        {
+            var request = new HelloRequest { Name = name };
+
+            var ret = await _daprClient.InvokeMethodGrpcAsync<HelloRequest, HelloReply>("grpcb", "getHttpB", request);
+
+            var dataList = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<WeatherForecast>>(ret.Message);
+
+            return this.Ok(dataList);
         }
 
         [HttpGet]

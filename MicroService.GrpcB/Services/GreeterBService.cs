@@ -48,6 +48,17 @@ namespace MicroService.GrpcB.Services
                     response.Data = Any.Pack(outputA);
 
                     break;
+                case "getHttpB":
+                    var httpbRet = await _daprClient.InvokeMethodAsync<IEnumerable<WeatherForecast>>(HttpMethod.Get, "httpb", "weatherforecast");
+
+                    var outputhttpB = new HelloReply
+                    {
+                        Message = System.Text.Json.JsonSerializer.Serialize(httpbRet)
+                    };
+
+                    response.Data = Any.Pack(outputhttpB);
+
+                    break;
                 default:
                     break;
             }
