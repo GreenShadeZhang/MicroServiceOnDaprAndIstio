@@ -5,4 +5,4 @@
 
 ## 通过测试在http服务调用http再调用grpc证明了grpc只和边车(sidecar)建立连接,客户端是http调用dapr的时候委托给dpar所以可以在http服务里自由调用http和grpc。
 
-## 待验证从grpc服务通过边车(sidecar)调用http服务。
+## Grpc调用http也没问题，边车已处理相关问题。
