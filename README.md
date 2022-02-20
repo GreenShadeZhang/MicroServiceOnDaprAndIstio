@@ -1,4 +1,6 @@
 # MicroServiceOnDaprAndIstio
+
+![service invocation](./dapr-service-invocation.png)
 ## 测试微服务在dapr下的服务互相调用，包括从http到grpc，http到http，http到grpc到grpc，后期会加入istio和dapr的配合使用。
 
 ## 目前的测试项目为两个http服务和两个grpc服务 
